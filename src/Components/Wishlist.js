@@ -9,15 +9,15 @@ export  function Wishlist() {
 
   if (getTotalItem(wishlist) === 0) {
     return (
-      <div className="center grey-text" style={{ marginTop: "6.5rem" }}>
+      <div className="center grey-text main-section" >
         <h1>The wishlist is empty</h1>
       </div>
     );
   } else {
     return (
       <div
-        className="horizontal-card center wrap "
-        style={{ marginTop: "6.5rem" }}
+        className="horizontal-card center wrap main-section"
+        
       >
         {wishlist.map(
           ({

@@ -17,13 +17,13 @@ export  function Cart() {
   console.log(cartQuantity);
   if (cartQuantity === 0) {
     return (
-      <div style={{ marginTop: "6.5rem" }} className="center grey-text">
+      <div className="center grey-text main-section">
         <h1>The cart is empty</h1>
       </div>
     );
   } else {
     return (
-      <div style={{ marginTop: "6.5rem" }} className="vertical-card">
+      <div className="vertical-card main-section">
         <h1 className="center">Cart</h1>
 
         <h1 className="center">Total: {getTotalAmount(cartItems)} </h1>

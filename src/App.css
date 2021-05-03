@@ -41,7 +41,7 @@
   
 }
 .header{
-  /* padding: 0 2rem; */
+  padding: 0 2rem;
   /* justify-content: none; */
   flex-direction: column;
   /* width: calc(100vw - 2rem); */
