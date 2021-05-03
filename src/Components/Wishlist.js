@@ -62,7 +62,7 @@ export  function Wishlist() {
                 </div>
                 <div className="horizontal-card center">
                 <Link
-                  to={checkItem(cartItems, id) ? "/cart" : "/"}
+                  to={checkItem(cartItems, id) ? "/cart" : "/wishlist"}
                   className="btn md-btn primary-btn"
                   onClick={() => {
                     if (!checkItem(cartItems, id)) {

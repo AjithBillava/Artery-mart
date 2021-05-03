@@ -68,9 +68,9 @@ export function Product() {
               className="card product center vertical-card md-width-card  relative-box "
             >
               <button
-                className=" top-right dismiss-btn center curve"
+                className=" top-right wishlist-btn center curve"
                 style={{
-                  color: `${checkItem(wishlist, id) ? "red" : "white"}`
+                  color: `${checkItem(wishlist, id) ? "red" : "black"}`
                 }}
                 onClick={() => {
                   checkItem(wishlist, id)
@@ -101,24 +101,31 @@ export function Product() {
               </div>
               <div>
                 <h3 className="product-name"> {name} </h3>
-                <div>Rs. {price}</div>
-                {inStock && <div> In Stock </div>}
-                {!inStock && <div> Out of Stock </div>}
-                <div>
-                  rating {rating} <i class="far fa-star"></i>
+                <div className="product-details center">
+                    <div className="md-txt">Rs. {price}</div>
+                    {/* {inStock && <div> In Stock </div>}
+                    {!inStock && <div> Out of Stock </div>} */}
+                    <div className="rating center curve">
+                     {rating}
+                      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" className="rating-icon" viewBox="0 0 32 32"> <title>star-full</title>
+                              <path
+                                  d="M32 12.408l-11.056-1.607-4.944-10.018-4.944 10.018-11.056 1.607 8 7.798-1.889 11.011 9.889-5.199 9.889 5.199-1.889-11.011 8-7.798z">
+                              </path>
+                      </svg>
+                    </div>
+                    {/* {fastDelivery ? (
+                      <div> Fast Delivery </div>
+                    ) : (
+                      <div> 3 days minimum </div>
+                    )} */}
+                    {/* <div>{offer}</div> */}
                 </div>
-                {fastDelivery ? (
-                  <div> Fast Delivery </div>
-                ) : (
-                  <div> 3 days minimum </div>
-                )}
-                <div>{offer}</div>
               </div>
 
               <div className="horizontal-card wrap center">
                 <Link
                   to={checkItem(cartItems, id) ? "/cart" : "/"}
-                  className="btn md-btn primary-btn"
+                  className="btn add-to-cart-btn md-btn primary-btn"
                   onClick={() => {
                     if (!checkItem(cartItems, id)) {
                       
