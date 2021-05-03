@@ -18,21 +18,46 @@
 } */
 
 
-.aside-nav{
+.side-nav{
+  flex-direction: column;
+    height: auto;
+    
+    min-width: 15rem;
+    /* position: fixed; */
+    /* margin-bottom: var(--margin-1); */
+   
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: auto;
   border-right: 2px solid rgba(128, 128, 128, 0.596);
-  padding: 2rem 1rem ;
-  max-width: 18%;
+  padding: 1rem 1rem ;
+  /* max-width: 18%; */
   /* max-width: 0; */
 }
-.main-layout{
-  grid-template-columns: 0.2fr 0.8fr;
+.main-section{
+  
   margin-top: 5rem;
-  /* height: 100vh; */
+  display: flex;
+  
 }
 .header{
-  padding: 0 2rem;
-  /* width: 100vw; */
+  /* padding: 0 2rem; */
+  /* justify-content: none; */
+  flex-direction: column;
+  /* width: calc(100vw - 2rem); */
+  max-width: 100vw;
 }
+.nav-sec{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100vw - 2rem);
+  /* max-width: 100vw; */
+}
+/* .header-title{
+  width: 100%;
+} */
 .space-between {
   display: flex;
   justify-content: space-between;
@@ -83,8 +108,14 @@
 }
 .search-bar{
   border: 1px solid black;
-  width: 25%;
+  /* width: 15; */
   border-radius: 0.6rem;
+}
+.desktop-view-search-bar{
+  width: 35%;
+}
+.mobile-view-search-bar{
+  display: none;
 }
 
 .pd2 {
@@ -104,6 +135,9 @@
 }
 .mg1-t{
   margin-top: 1rem;
+}
+.mg1-b{
+  margin-bottom: 1rem;
 }
 .md-btn {
   margin: 0;
@@ -127,3 +161,38 @@ a{
   text-decoration: none;
 }
 
+@media (max-width:780px) {
+  .main-section{
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .side-nav{
+    padding:0 1rem;
+  }
+  .filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .filter-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+@media (max-width:525px) {
+  .filter{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .main-section{
+    margin-top: 8rem;
+  }
+  .desktop-view-search-bar{
+    display: none;
+  }
+  .mobile-view-search-bar{
+    display: flex;
+  }
+}

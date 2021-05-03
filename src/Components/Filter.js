@@ -5,16 +5,16 @@ export const Filter = () =>{
     const {productState,productDispatch} = useProduct()
 
     return(
-        <div className="aside-nav">
-            <div className="horizontal-card space-between center pd2-l-r">
+        <div className="side-nav">
+            <div className="horizontal-card filter-title space-between center pd2-l-r">
                 <p className="md-txt"> Filters </p>
                 <button className="btn link-btn md-btn" style={{ margin: "0 1rem" }}
                     onClick={() => productDispatch({ type: "clear" })}>
                     clear
                 </button>
             </div>
-            <div>
-                <div className="vertical-card shadow pd1 ">
+            <div className="filter">
+                <div className="vertical-card shadow pd1 mg1-b ">
                     <label className=" align-center " htmlFor="fastDelivery" style={{ margin: "0 1rem" }}>
                         <input
                             checked={productState.showFastDeliveryOnly}
@@ -38,9 +38,7 @@ export const Filter = () =>{
                     </label>
 
                 </div>
-                
-            </div>
-            <div className="vertical-card shadow pd1 mg1-t">
+                <div className="vertical-card shadow pd1 mg1-b">
                 <label className=" align-center" style={{ margin: "0 1rem" }}>
                     <input
                     name="sort"
@@ -66,6 +64,8 @@ export const Filter = () =>{
                     Price-High-to-Low
                 </label>
             </div>
+            </div>
+            
             
       </div>
       

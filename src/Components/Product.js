@@ -48,7 +48,7 @@ export function Product() {
   );
 
   return (
-    <div className="main-layout" >
+    <div className="main-section" >
     <Filter/>
     <div className="container horizontal-card center wrap">
         {filteredList.map(
