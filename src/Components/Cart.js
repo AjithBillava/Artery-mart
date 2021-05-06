@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useData } from "../Context/DataContext";
 import { INCREEMENT_CART, DECREEMENT_CART, REMOVE_CART } from "../Reducer/DataReducer";
-// import {checkItem} from "./product"
 
 const getTotalAmount = (item) => {
   return item.reduce((total, { price, qty }) => total + price * qty, 0);
@@ -81,7 +80,6 @@ export  function Cart() {
                     }
                   >
                     -
-                    {/* {qty!==1 ? "-" : <i class="far icon fa-trash-alt"></i>} */}
                   </button>
 
                   {qty === 0 ? 0 : <div className="justify-center">{qty}</div>}
