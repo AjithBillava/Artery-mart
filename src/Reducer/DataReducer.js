@@ -18,7 +18,6 @@ export const data = {
 export const dataReducer = (state, { type, id, item, payLoad }) => {
   const { cartItems, wishlist, cartQuantity } = state;
   console.log(cartItems, cartQuantity);
-  // console.log(payLoad.target.value);
 
   switch (type) {
     case INCREEMENT_CART:

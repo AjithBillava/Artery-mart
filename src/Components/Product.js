@@ -103,8 +103,6 @@ export function Product() {
                 <h3 className="product-name"> {name} </h3>
                 <div className="product-details center">
                     <div className="md-txt">Rs. {price}</div>
-                    {/* {inStock && <div> In Stock </div>}
-                    {!inStock && <div> Out of Stock </div>} */}
                     <div className="rating center curve">
                      {rating}
                       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" className="rating-icon" viewBox="0 0 32 32"> <title>star-full</title>
@@ -113,11 +111,6 @@ export function Product() {
                               </path>
                       </svg>
                     </div>
-                    {/* {fastDelivery ? (
-                      <div> Fast Delivery </div>
-                    ) : (
-                      <div> 3 days minimum </div>
-                    )} */}
                     {/* <div>{offer}</div> */}
                 </div>
               </div>
@@ -147,7 +140,6 @@ export function Product() {
                 >
                   {checkItem(cartItems, id) ? "Go to Cart" : "Add to cart"}
                 </Link>
-                {/* <button className="btn primary-btn md-btn">Buy now</button> */}
               </div>
 
               {!inStock?

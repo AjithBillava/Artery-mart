@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {Link}from "react-router-dom"
 import { useData } from "../Context/DataContext"
-// import { AsideNav } from "./Aside_Navigation";
 export const getTotalItem = (item) => {
     return item.reduce((total, { qty }) => total + qty, 0);
   };
@@ -31,7 +30,6 @@ export const Navigation = () =>{
                       <Link
                   to="/cart"
                   className="badge-container nav-btn btn  relative-box"
-                  // onClick={() => setRoute("Cart")}
                 >
                   <i  style={{height:"2rem",width:"2rem"}}>
                       <svg xmlns="http://www.w3.org/2000/svg" dataname="Layer 1" viewBox="0 0 100 125" x="0px" y="0px"><g dataname="Group"><path dataname="Path" d="M41.9,65.5a9.4,9.4,0,1,0,9.2,9.3A9.2,9.2,0,0,0,41.9,65.5Z"></path><path dataname="Path" d="M70.6,65.5a9.4,9.4,0,1,0,9.1,9.3A9.2,9.2,0,0,0,70.6,65.5Z"></path><path dataname="Path" d="M87.7,26.3H28.4L25.8,18A3,3,0,0,0,23,15.8H9.3v6H20.7L32.6,60a2.9,2.9,0,0,0,2.8,2.1H78.7A3.1,3.1,0,0,0,81.6,60l9-29.8a3,3,0,0,0-2.9-3.9Z"></path></g></svg>
@@ -56,7 +54,6 @@ export const Navigation = () =>{
                 <Link
                 to="/wishlist"
                   className="badge-container nav-btn btn relative-box"
-                  // onClick={() => setRoute("Wishlist")}
                 >
                   <i  style={{height:"2rem",width:"2rem"}}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="black" version="1.1" x="0px" y="0px" viewBox="0 0 512 640" enable-background="new 0 0 512 512"><g><path d="M256,448l-30.164-27.211C118.718,322.442,48,258.61,48,179.095C48,114.221,97.918,64,162.4,64   c36.399,0,70.717,16.742,93.6,43.947C278.882,80.742,313.199,64,349.6,64C414.082,64,464,114.221,464,179.095   c0,79.516-70.719,143.348-177.836,241.694L256,448z"></path></g></svg>
@@ -91,8 +88,6 @@ export const Navigation = () =>{
                       </i>
                   </div>
             </nav>
-        {/* <div className="aside-nav"></div> */}
-                {/* <AsideNav/> */}
         
         </div>
     )
