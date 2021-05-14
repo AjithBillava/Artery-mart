@@ -30,7 +30,7 @@ export  function Cart() {
         <div className="horizontal-card center wrap">
           {cartItems.map(
             ({
-              id,
+              _id,
               name,
               image,
               price,
@@ -41,12 +41,12 @@ export  function Cart() {
               qty
             }) => (
               <div
-                key={id}
+                key={_id}
                 className="card horizontal-card lg-width-card  relative-box shadow"
               >
                 <button
                   className="top-right dismiss-btn  "
-                  onClick={() => dataDispatch({ type: REMOVE_CART, id: id })}
+                  onClick={() => dataDispatch({ type: REMOVE_CART, id: _id })}
                 >
                   x
                 </button>
@@ -74,7 +74,7 @@ export  function Cart() {
                       qty !== 0
                         ? dataDispatch({
                             type: DECREEMENT_CART,
-                            id: id
+                            id: _id
                           })
                         : "dataDispatch({ type: REMOVE_CART, id: id })"
                     }
@@ -88,7 +88,7 @@ export  function Cart() {
                     onClick={() =>
                       dataDispatch({
                         type: INCREEMENT_CART,
-                        id: id
+                        id: _id
                       })
                     }
                   >

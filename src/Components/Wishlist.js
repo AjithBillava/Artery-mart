@@ -21,7 +21,7 @@ export  function Wishlist() {
       >
         {wishlist.map(
           ({
-            id,
+            _id,
             name,
             image,
             price,
@@ -32,13 +32,13 @@ export  function Wishlist() {
             qty
           }) => (
             <div
-              key={id}
+              key={_id}
               className="card horizontal-card lg-width-card  relative-box shadow"
             >
               <button
                 className="top-right dismiss-btn  "
                 onClick={() =>
-                  dataDispatch({ type: REMOVE_FROM_WISHLIST, id: id })
+                  dataDispatch({ type: REMOVE_FROM_WISHLIST, id: _id })
                 }
               >
                 x
@@ -62,15 +62,15 @@ export  function Wishlist() {
                 </div>
                 <div className="horizontal-card center">
                 <Link
-                  to={checkItem(cartItems, id) ? "/cart" : "/wishlist"}
+                  to={checkItem(cartItems, _id) ? "/cart" : "/wishlist"}
                   className="btn md-btn primary-btn"
                   onClick={() => {
-                    if (!checkItem(cartItems, id)) {
+                    if (!checkItem(cartItems, _id)) {
                       
                       dataDispatch({
                         type: ADD_TO_CART,
                         item: {
-                          id,
+                          _id,
                           name,
                           price,
                           inStock,
@@ -83,7 +83,7 @@ export  function Wishlist() {
                     }
                   }}
                 >
-                  {checkItem(cartItems, id) ? "Go to Cart" : "Add to cart"}
+                  {checkItem(cartItems, _id) ? "Go to Cart" : "Add to cart"}
                 </Link>
                 </div>
               </div>

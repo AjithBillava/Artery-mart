@@ -1,4 +1,4 @@
-import { productDB as prodData } from "../Database/ProductDB";
+// import { productDB as prodData } from "../Database/ProductDB";
 
 export const INCREEMENT_CART = "INCREEMENT_CART";
 export const DECREEMENT_CART = "DECREEMENT_CART";
@@ -9,7 +9,7 @@ export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
 
 export const data = {
-  prodData,
+  prodData:[],
   cartItems: [],
   wishlist: [],
   cartQuantity: 0
@@ -17,15 +17,19 @@ export const data = {
 
 export const dataReducer = (state, { type, id, item, payLoad }) => {
   const { cartItems, wishlist, cartQuantity } = state;
-  console.log(cartItems, cartQuantity);
+  // console.log(cartItems, cartQuantity);
 
   switch (type) {
+    case "SET_PRODUCT":
+        return{
+          ...state,prodData:payLoad
+        }
     case INCREEMENT_CART:
       return {
         ...state,
         cartItems: cartItems.map((item) => {
           console.log(item);
-          return item.id === id ? { ...item, qty: item.qty + 1 } : item;
+          return item._id === id ? { ...item, qty: item.qty + 1 } : item;
         })
       };
 
@@ -33,13 +37,13 @@ export const dataReducer = (state, { type, id, item, payLoad }) => {
       return {
         ...state,
         cartItems: cartItems.map((item) => {
-          return item.id === id ? { ...item, qty: item.qty - 1 } : item;
+          return item._id === id ? { ...item, qty: item.qty - 1 } : item;
         })
       };
     case REMOVE_CART:
       return {
         ...state,
-        cartItems: cartItems.filter((item) => item.id !== id),
+        cartItems: cartItems.filter((item) => item._id !== id),
         cartQuantity: cartQuantity - 1
       };
     case ADD_TO_CART:
@@ -59,20 +63,21 @@ export const dataReducer = (state, { type, id, item, payLoad }) => {
     case REMOVE_FROM_WISHLIST:
       return {
         ...state,
-        wishlist: wishlist.filter((item) => item.id !== id)
+        wishlist: wishlist.filter((item) => item._id !== id)
       };
     case "SEARCH":
-      let val = payLoad.toLocaleLowerCase();
-      console.log(
-        prodData.filter((item) => item.name.toLocaleLowerCase().includes(val))
-      );
+      console.log(payLoad)
+      // if(payLoad.length===0)
+      // {
+      //   return(
+      //   <div>no such products</div>
 
-      return {
-        ...state,
-        prodData: prodData.filter((item) =>
-          item.name.toLocaleLowerCase().includes(val)
-        )
-      };
+      //   )
+      // }
+      return{
+        ...state, prodData:payLoad
+        }
+
     default:
       console.log("Error");
       return state;
