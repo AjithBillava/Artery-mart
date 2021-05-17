@@ -171,7 +171,20 @@
 .mobile-view-search-bar{
   display: none;
 }
-
+.toast-message{
+  position: absolute;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  z-index: 5;
+  background-color: white;
+  box-shadow: 0.2rem 0.2rem 1rem rgb(0 0 0 / 56%);
+}
+.toast-container{
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  z-index: 5;
+}
 .pd2 {
   padding: 2rem;
 }

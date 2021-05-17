@@ -10,8 +10,22 @@ export const getTotalItem = (item) => {
 
 export const getSearchedData = (productList,searchedItem)=>{
   let val = searchedItem.toLocaleLowerCase();
-  console.log(productList.filter((item) =>
-  item.name.toLocaleLowerCase().includes(val)))
+   
+
+  // if(val!==""){
+  //   console.log(val)
+  //   return productList.map(item=>
+  //     {
+  //       if(item.name.toLocaleLowerCase().includes(val)){
+  //         return item
+  //       }
+  //       else{
+  //         console.log("no such product")
+  //         return({name:"no such product"})}
+  //     }
+  //   )
+  // }
+  // else return productList
       return productList.filter((item) =>
       item.name.toLocaleLowerCase().includes(val))
 };
