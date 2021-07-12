@@ -44,6 +44,9 @@ export const Navigation = () =>{
                  
                   <div>
                       <ul className="non-bullet nav-social-links inline-list align-center spa">
+                        <Link className="btn md-btn primary-btn" to="/login">
+                          login
+                        </Link>
                       <Link
                   to="/cart"
                   className="badge-container nav-btn btn  relative-box"
@@ -91,6 +94,7 @@ export const Navigation = () =>{
                     {getTotalItem(wishlist)}
                   </span>:<span></span>}
                 </Link>
+                
                       </ul>
                   </div>
               </div>

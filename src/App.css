@@ -228,6 +228,16 @@ a{
   text-decoration: none;
 }
 
+.input{
+    font-size: var(--font-size-1-5);
+    padding: var(--padding-0-5);
+    margin-bottom: var(--margin-1);
+    border: 1px solid #aaa9a5;
+    /* background-color: var(--primary-font-color); */
+    width: 20rem;
+  }
+
+
 @media (max-width:780px) {
   .main-section{
     flex-direction: column;

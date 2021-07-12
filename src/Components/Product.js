@@ -11,58 +11,30 @@ import { Filter } from "./Filter";
 import { useAxios } from "../Server/server.request";
 import { useEffect} from "react";
 import {getSearchedData} from "./Navigation"
+import { getSortedData } from "../utils/getSortedData";
+import { getFilteredData } from "../utils/getFilteredData";
+import { checkItem } from "../utils/checkItem";
 
-export const checkItem = (array, id) => {
-  return array.find((item) => item._id === id);
-};
+
 
 export function Product({showToast,setShowToast}) {
   const { productState } = useProduct();
   const { cartItems, wishlist, dataDispatch , prodData} = useData();
 
-  
-  const productData = useAxios()
+  const prodLocal=JSON.parse(localStorage.getItem("products"))
+  // console.log(prodLocal)
+  const prodServer = useAxios()
+  // const productData = prodLocal?prodLocal:prodServer
 
   useEffect(()=>{
-    dataDispatch({type:"SET_PRODUCT",payLoad:productData})
-  },[dataDispatch, productData])
+    // const prodLocal=JSON.parse(localStorage.getItem("products"))
 
+    dataDispatch({type:"SET_PRODUCT",payLoad:prodServer})
+  },[dataDispatch,prodServer])
+  
   // useEffect(()=>{
-  //   const interval=setTimeout(()=>{
-  //     setShowToast(false)
-  //   },2000)
-  //   return () => {
-  //     clearTimeout(interval);
-  // }
-  // },[showToast])
-
-  function getSortedData(productList, sortBy) {
-    if (sortBy === "Price-low-high") {
-      return productList.sort((a, b) => a["price"] - b["price"]);
-    }
-    if (sortBy === "Price-high-low") {
-      return productList.sort((a, b) => b["price"] - a["price"]);
-    }
-
-    return productList;
-  }
-
-  function getFilteredData(
-    productList,
-    showFastDeliveryOnly,
-    showInventoryAll
-  ) {
-    return productList
-    ? (
-      productList
-        .filter(({ fastDelivery }) =>
-          showFastDeliveryOnly ? fastDelivery : true
-        )
-        .filter(({ inStock }) => (showInventoryAll ? true : inStock))
-    ) : (
-      <div>loading..</div>
-    );
-  }
+  //   dataDispatch({type:"SET_PRODUCT",payLoad:prodLocal?prodLocal :prodServer})
+  // },[dataDispatch,prodServer,prodLocal])
 
   const sortedData = getSortedData(prodData, productState.sortBy);
   const filteredList = getFilteredData(
@@ -85,7 +57,7 @@ export function Product({showToast,setShowToast}) {
                           placeholder="search products here..."
                           onChange={(e) =>
                             dataDispatch({ type: "SEARCH", 
-                            payLoad: getSearchedData(productData,e.target.value) })
+                            payLoad: getSearchedData(prodLocal?prodLocal:prodServer,e.target.value) })
                             
                           }
                           >

@@ -9,8 +9,7 @@ export const ProductProvider = ({ children }) => {
     data,
     showFastDeliveryOnly: false,
     showInventoryAll: false,
-    sortBy: null,
-    uncheck: false
+    sortBy: null
   });
   return (
     <ProductContext.Provider

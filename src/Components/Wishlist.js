@@ -1,8 +1,8 @@
 import { useData } from "../Context/DataContext";
 import { ADD_TO_CART, REMOVE_FROM_WISHLIST } from "../Reducer/DataReducer";
-import { checkItem } from "../Components/Product";
 import { getTotalItem } from "../Components/Navigation";
 import { Link } from "react-router-dom";
+import { checkItem } from "../utils/checkItem";
 
 export  function Wishlist() {
   const { cartItems, wishlist, dataDispatch } = useData();
