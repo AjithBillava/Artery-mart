@@ -9,6 +9,7 @@ import { CartUpdatedToast } from "./Components/Toasts/Toasts";
 import { useState ,useEffect } from 'react';
 import { Login } from './Components/login';
 import { PrivateRoute } from './Components/private route/PrivateRoute';
+import { Register } from './Components/register';
 function App() {
   const [showToast,setShowToast] = useState(false)
 
@@ -29,6 +30,7 @@ function App() {
         <PrivateRoute path="/cart" element={<Cart/>} />
         <PrivateRoute path="/wishlist" element={<Wishlist/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
       </Routes>
     </div>
 

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { fakeAuthAPI } from "../fakeAuthAPi";
 
@@ -10,19 +11,28 @@ export const LoginProvider = ({children}) => {
     },[])
 
     const [login,setLogin] = useState(false)
-    const userLogin = async (username,password,state,navigate )=>{
+    const userLogin = async (email,password,state,navigate )=>{
         try{
-            const response = await fakeAuthAPI(username,password)
-            if(!response.success){
-                console.log(response.errorMessage)
-            }
-            if(response.success){
-                setLogin(true)
-                localStorage.setItem("login",JSON.stringify({logged:true})) 
-                navigate(state?.from?state.from:"/")
-            }
+            // const response = await fakeAuthAPI(username,password)
+            // if(!response.success){
+            //     console.log(response.errorMessage)
+            // }
+            // if(response.success){
+            //     setLogin(true)
+            //     localStorage.setItem("login",JSON.stringify({logged:true})) 
+            //     navigate(state?.from?state.from:"/")
+            // }
+
+            const {data} = await axios.post("https://artery-mart-backend.herokuapp.com/v1/api/user/login",{email,password})
+            localStorage.setItem("token",data.token)
+            setLogin(true)
+            localStorage.setItem("login",JSON.stringify({logged:true})) 
+            navigate(state?.from?state.from:"/")
+            
         }catch(error){
-            console.log(error)
+            console.error(error)
+            console.log(error.response)
+            
         }
     }
     const userLogout = () =>{

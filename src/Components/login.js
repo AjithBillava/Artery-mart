@@ -1,13 +1,13 @@
 import { useReducer } from "react";
-import { useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useLogin } from "../Context/LoginContext"
 
 export const loginReducer  = (state,{type,payload}) =>{
     switch (type){
-        case "username":
+        case "email":
             return {
             ...state,
-            username: payload
+            email: payload
             };
         case "password":
             return {
@@ -18,7 +18,7 @@ export const loginReducer  = (state,{type,payload}) =>{
             return {
             ...state,
             password: "",
-            username: ""
+            email: ""
             };
         default:
             return state;
@@ -30,30 +30,37 @@ export const Login = () =>{
     const {state} =useLocation()
     const navigate = useNavigate()
 
-    const [{ username, password }, dispatch] = useReducer(loginReducer, {
-        username: "",
+    const [{ email, password }, dispatch] = useReducer(loginReducer, {
+        email: "",
         password: ""
       });
 
     return(
         <div className="horizontal-card center wrap main-section">
 
-            <form className="sub-heading card block-card ">
-                <div className="mr1">Login page</div>
+            <form className=" card block-card ">
+                <div className="center sub-heading mr1">Login page</div>
                 <div className="vertical-card center">
-                    <input className="input curve" type="username" placeholder="Email" required 
+                    <input className="input curve" type="email" placeholder="Email" required 
                     onChange={(e) =>
-                        dispatch({ type: "username", payload: e.target.value })
+                        dispatch({ type: "email", payload: e.target.value })
                       }></input>
                     <input className="input curve" type="password" placeholder="Password" required
                     onChange={(e) =>
                         dispatch({ type: "password", payload: e.target.value })
                       }></input>
-                    <button type="submit" className="secondary-btn md-btn btn" onClick={()=>
-                    {
+                    <button  className="secondary-btn md-btn btn" value="send" onClick={(e)=>
+                    {       
                         if(!login){
-                            userLogin(username,password,state,navigate)
-                            console.log(state)
+                            console.log(email,password)
+                            userLogin(email,password,state,navigate)
+
+                            console.log(email,password)
+                            
+                            
+                            e.preventDefault()
+                            // userLogin(email,password,state,navigate)
+                            // console.log(state)
                             // console.log(state?.from)
                             
                             }
@@ -67,7 +74,10 @@ export const Login = () =>{
                     >
                         {login?"Logout":"Login"}
                     </button>
-
+                    <div className="grey-text">
+                        Not registered yet?
+                        <Link to="/register"> Register here</Link>
+                    </div>
                 </div>
                 
             </form>
