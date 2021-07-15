@@ -71,7 +71,9 @@ export const Register = () =>{
                     onChange={(e) =>
                         dispatch({ type: "password", payload: e.target.value })
                       }></input>
-                    <button  className="secondary-btn md-btn btn" value="send" >
+                    <button  className="secondary-btn md-btn btn" value="send" onClick ={(e)=>{
+                        console.log(email,password)
+                        e.preventDefault()} }>
                         {"Register"}
                     </button>
 
