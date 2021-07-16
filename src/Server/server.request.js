@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useData } from "../Context/DataContext";
 
+// console.log(process.env.REACT_APP_BACKEND_URL)
+const {REACT_APP_BACKEND_URL} = process.env
 export const useAxios = () => {
+
         const [prodData, setProd] = useState(null);
         const {dataDispatch } =useData()
         useEffect(() => {
           setTimeout(() => {
             axios
-              .get("https://artery-mart-backend.herokuapp.com/v1/api/products")
+              .get(`${REACT_APP_BACKEND_URL}/products`)
               .then((response) => {
                 // localStorage.setItem("products",JSON.stringify(response.data.products))
                 setProd(response.data.products);

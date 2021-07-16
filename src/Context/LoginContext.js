@@ -9,21 +9,12 @@ export const LoginProvider = ({children}) => {
         const loginStatus = JSON.parse(localStorage?.getItem("login"))
         loginStatus?.logged && setLogin(true)
     },[])
+    const {REACT_APP_BACKEND_URL} = process.env
 
     const [login,setLogin] = useState(false)
     const userLogin = async (email,password,state,navigate )=>{
         try{
-            // const response = await fakeAuthAPI(username,password)
-            // if(!response.success){
-            //     console.log(response.errorMessage)
-            // }
-            // if(response.success){
-            //     setLogin(true)
-            //     localStorage.setItem("login",JSON.stringify({logged:true})) 
-            //     navigate(state?.from?state.from:"/")
-            // }
-
-            const {data} = await axios.post("https://artery-mart-backend.herokuapp.com/v1/api/user/login",{email,password})
+            const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/login`,{email,password})
             localStorage.setItem("token",data.token)
             setLogin(true)
             localStorage.setItem("login",JSON.stringify({logged:true})) 

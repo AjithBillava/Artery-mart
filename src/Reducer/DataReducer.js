@@ -12,7 +12,9 @@ export const data = {
   prodData:[],
   cartItems: [],
   wishlist: [],
-  cartQuantity: 0
+  cartQuantity: 0,
+  user:{},
+  isAuthenticated: false
 };
 
 export const dataReducer = (state, { type, id, item, payLoad }) => {
