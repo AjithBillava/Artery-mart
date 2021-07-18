@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { checkItem } from "../utils/checkItem";
 
 export  function Wishlist() {
-  const { cartItems, wishlist, dataDispatch } = useData();
+  const { state:{cartItems, wishlist, dataDispatch} } = useData();
 
   if (getTotalItem(wishlist) === 0) {
     return (

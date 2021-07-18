@@ -10,9 +10,11 @@ import { useState ,useEffect } from 'react';
 import { Login } from './Components/login';
 import { PrivateRoute } from './Components/private route/PrivateRoute';
 import { Register } from './Components/register';
+import { useData } from './Context/DataContext';
+import { Loader } from './Components/loader';
 function App() {
   const [showToast,setShowToast] = useState(false)
-
+  const {loadData,state} = useData()
   useEffect(()=>{
     const interval=setTimeout(()=>{
       setShowToast(false)
@@ -21,10 +23,24 @@ function App() {
       clearTimeout(interval);
   }
   },[showToast])
+
+  useEffect(() => {
+		let isMounted = true;
+		if (isMounted) {
+      loadData()
+			
+		}
+		return () => {
+			isMounted = false;
+		};
+	}, []);
+
   return (
     <div className="App">
       <Navigation/>
       {showToast && <CartUpdatedToast/>}
+      {state.isLoading && <Loader/>}
+
       <Routes>
         <Route path="/" element={<Product showToast={showToast} setShowToast={setShowToast} />} />
         <PrivateRoute path="/cart" element={<Cart/>} />

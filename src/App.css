@@ -236,7 +236,13 @@ a{
     /* background-color: var(--primary-font-color); */
     width: 20rem;
   }
-
+.loader{
+  height: 90vh;
+  z-index: 5;
+  position: absolute;
+  background-color: white;
+  width: 100vw;
+}
 
 @media (max-width:780px) {
   .main-section{

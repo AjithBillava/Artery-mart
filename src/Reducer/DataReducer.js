@@ -14,7 +14,9 @@ export const data = {
   wishlist: [],
   cartQuantity: 0,
   user:{},
-  isAuthenticated: false
+  isAuthenticated: false,
+  isLoading:false,
+  searchedText:null
 };
 
 export const dataReducer = (state, { type, id, item, payLoad }) => {
@@ -25,6 +27,10 @@ export const dataReducer = (state, { type, id, item, payLoad }) => {
     case "SET_PRODUCT":
         return{
           ...state,prodData:payLoad
+        }
+    case "SET_LOADING":
+        return{
+          ...state,isLoading:payLoad
         }
     case INCREEMENT_CART:
       return {
@@ -77,7 +83,7 @@ export const dataReducer = (state, { type, id, item, payLoad }) => {
       //   )
       // }
       return{
-        ...state, prodData:payLoad
+        ...state, searchedText:payLoad
         }
 
     default:

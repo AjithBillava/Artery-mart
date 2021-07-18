@@ -7,7 +7,7 @@ export const LoginContext  = createContext();
 export const LoginProvider = ({children}) => {
     useEffect(()=>{
         const loginStatus = JSON.parse(localStorage?.getItem("login"))
-        loginStatus?.logged && setLogin(true)
+        loginStatus && setLogin(true)
     },[])
     const {REACT_APP_BACKEND_URL} = process.env
 
@@ -17,7 +17,7 @@ export const LoginProvider = ({children}) => {
             const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/login`,{email,password})
             localStorage.setItem("token",data.token)
             setLogin(true)
-            localStorage.setItem("login",JSON.stringify({logged:true})) 
+            localStorage.setItem("login",true) 
             navigate(state?.from?state.from:"/")
             
         }catch(error){
