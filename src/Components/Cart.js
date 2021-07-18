@@ -7,7 +7,7 @@ const getTotalAmount = (item) => {
 };
 
 export  function Cart() {
-  const { state:{cartItems, dataDispatch, cartQuantity} } = useData();
+  const { state:{cartItems,  cartQuantity} ,dataDispatch} = useData();
 
   useEffect(() => {
     console.log({ cartItems, cartQuantity });

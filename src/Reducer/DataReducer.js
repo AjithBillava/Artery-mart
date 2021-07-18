@@ -16,7 +16,7 @@ export const data = {
   user:{},
   isAuthenticated: false,
   isLoading:false,
-  searchedText:null
+  searchedText:""
 };
 
 export const dataReducer = (state, { type, id, item, payLoad }) => {
