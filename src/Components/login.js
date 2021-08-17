@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useLogin } from "../Context/LoginContext"
+import { useData } from "../Context/DataContext";
+// import { useLogin } from "../Context/LoginContext"
 
 export const loginReducer  = (state,{type,payload}) =>{
     switch (type){
@@ -26,7 +27,8 @@ export const loginReducer  = (state,{type,payload}) =>{
 }
 
 export const Login = () =>{
-    const {login,userLogin,userLogout} =useLogin()
+    // const {login,userLogin,userLogout} =useLogin()
+    const {state:{isAuthenticated},loginUser,logoutUser} = useData()
     const {state} =useLocation()
     const navigate = useNavigate()
 
@@ -51,28 +53,18 @@ export const Login = () =>{
                       }></input>
                     <button  className="secondary-btn md-btn btn" value="send" onClick={(e)=>
                     {       
-                        if(!login){
-                            console.log(email,password)
-                            userLogin(email,password,state,navigate)
-
-                            console.log(email,password)
-                            
-                            
+                        if(!isAuthenticated){
+                            loginUser(email,password,state,navigate)
                             e.preventDefault()
-                            // userLogin(email,password,state,navigate)
-                            // console.log(state)
-                            // console.log(state?.from)
-                            
-                            }
-                            else{
-                                userLogout()
-                                // navigate(state?.from?state.from:"/login")
-                            }
+                        }
+                        else{
+                            logoutUser()
+                        }
                         }
                     }          
 
                     >
-                        {login?"Logout":"Login"}
+                        {isAuthenticated?"Logout":"Login"}
                     </button>
                     <div className="grey-text">
                         Not registered yet?

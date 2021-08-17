@@ -1,13 +1,13 @@
 import { useData } from "../Context/DataContext";
-import { ADD_TO_CART, REMOVE_FROM_WISHLIST } from "../Reducer/DataReducer";
 import { getTotalItem } from "../Components/Navigation";
 import { Link } from "react-router-dom";
-import { checkItem } from "../utils/checkItem";
+import { checkItemInCart } from "../utils/checkItem";
 
 export  function Wishlist() {
-  const { state:{cartItems, wishlist, dataDispatch} } = useData();
+  const { state:{cartItems, wishlist,user},addToCart,removeFromWishlist } = useData();
+  const userId=user._id
 
-  if (getTotalItem(wishlist) === 0) {
+  if (getTotalItem(wishlist?.products) === 0) {
     return (
       <div className="center grey-text main-section" >
         <h1>The wishlist is empty</h1>
@@ -19,7 +19,7 @@ export  function Wishlist() {
         className="horizontal-card center wrap main-section"
         
       >
-        {wishlist.map(
+        {wishlist?.products?.map(
           ({
             _id,
             name,
@@ -38,7 +38,7 @@ export  function Wishlist() {
               <button
                 className="top-right dismiss-btn  "
                 onClick={() =>
-                  dataDispatch({ type: REMOVE_FROM_WISHLIST, id: _id })
+                  removeFromWishlist(userId,_id)
                 }
               >
                 x
@@ -62,28 +62,16 @@ export  function Wishlist() {
                 </div>
                 <div className="horizontal-card center">
                 <Link
-                  to={checkItem(cartItems, _id) ? "/cart" : "/wishlist"}
+                  to={checkItemInCart(cartItems, _id).length>0 ? "/cart" : "/wishlist"}
                   className="btn md-btn primary-btn"
                   onClick={() => {
-                    if (!checkItem(cartItems, _id)) {
+                    if (checkItemInCart(cartItems, _id)?.length===0||checkItemInCart(cartItems, _id)===false) {
                       
-                      dataDispatch({
-                        type: ADD_TO_CART,
-                        item: {
-                          _id,
-                          name,
-                          price,
-                          inStock,
-                          rating,
-                          fastDelivery,
-                          image,
-                          qty: 1
-                        }
-                      });
+                      addToCart(userId,_id);
                     }
                   }}
                 >
-                  {checkItem(cartItems, _id) ? "Go to Cart" : "Add to cart"}
+                  {checkItemInCart(cartItems, _id).length>0 ? "Go to Cart" : "Add to cart"}
                 </Link>
                 </div>
               </div>

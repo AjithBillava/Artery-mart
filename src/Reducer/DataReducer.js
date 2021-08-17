@@ -1,5 +1,3 @@
-// import { productDB as prodData } from "../Database/ProductDB";
-
 export const INCREEMENT_CART = "INCREEMENT_CART";
 export const DECREEMENT_CART = "DECREEMENT_CART";
 export const REMOVE_CART = "REMOVE_CART";
@@ -20,9 +18,8 @@ export const data = {
 };
 
 export const dataReducer = (state, { type, id, item, payLoad }) => {
-  const { cartItems, wishlist, cartQuantity } = state;
-  // console.log(cartItems, cartQuantity);
-
+  const { cartItems, wishlist} = state;
+ 
   switch (type) {
     case "SET_PRODUCT":
         return{
@@ -32,56 +29,83 @@ export const dataReducer = (state, { type, id, item, payLoad }) => {
         return{
           ...state,isLoading:payLoad
         }
-    case INCREEMENT_CART:
-      return {
+    case "LOAD_USER":
+      
+      return{
         ...state,
-        cartItems: cartItems.map((item) => {
-          console.log(item);
-          return item._id === id ? { ...item, qty: item.qty + 1 } : item;
-        })
-      };
+        user:payLoad.user,
+        isAuthenticated:true,
+        cartQuantity:payLoad.user.cart?.products.length,
+        cartItems:payLoad.user?.cart,
+        wishlist:payLoad.user?.wishList
+      }
+    case "LOGIN_USER":
+      localStorage.setItem("token",payLoad.token)
+      localStorage.setItem("isAuthenticated",true)
+      return{
+        ...state,
+        isAuthenticated:true,
+        user:payLoad.user,
+        cartQuantity:payLoad.user.cart?.products?.length,
+        cartItems:payLoad.user?.cart,
+        wishlist:payLoad.user?.wishList
+      }
+    case "REGISTER_USER":
+      localStorage.setItem("token",payLoad.token)
+      localStorage.setItem("isAuthenticated",true)
+      return{
+        ...state,
+        isAuthenticated:true,
+        user:payLoad.savedUser
+        
+      }
+    case "LOGOUT_USER":
+      localStorage.removeItem("token")
+      localStorage.removeItem("isAuthenticated")
+      console.log(cartItems,wishlist)
+      return{
+        ...state,
+        user:{},
+        isAuthenticated:false,
+        cartItems:[],
+        wishlist:[]
+      }
 
-    case DECREEMENT_CART:
+    case "INCREMENT_ITEM_OR_DECREMENT_ITEM":
       return {
         ...state,
-        cartItems: cartItems.map((item) => {
-          return item._id === id ? { ...item, qty: item.qty - 1 } : item;
-        })
-      };
+        cartItems:payLoad.item
+      }
+
     case REMOVE_CART:
       return {
         ...state,
-        cartItems: cartItems.filter((item) => item._id !== id),
-        cartQuantity: cartQuantity - 1
+        cartItems: payLoad.item,
+        cartQuantity: payLoad.item.products?payLoad.item.products.length:0
       };
     case ADD_TO_CART:
-      console.log({ state });
+      console.log({item},{cartItems});
       return {
         ...state,
-        cartItems: cartItems.concat(item),
-        cartQuantity: cartQuantity + 1
+        cartItems: payLoad.item,
+        cartQuantity: payLoad.item.products?payLoad.item.products.length:0
       };
-
+      
     case ADD_TO_WISHLIST:
+      console.log(wishlist)
       return {
         ...state,
-        wishlist: wishlist.concat(item)
+        wishlist: payLoad.item
       };
 
     case REMOVE_FROM_WISHLIST:
+      console.log(wishlist)
       return {
         ...state,
-        wishlist: wishlist.filter((item) => item._id !== id)
+        wishlist: payLoad.item
       };
     case "SEARCH":
       console.log(payLoad)
-      // if(payLoad.length===0)
-      // {
-      //   return(
-      //   <div>no such products</div>
-
-      //   )
-      // }
       return{
         ...state, searchedText:payLoad
         }

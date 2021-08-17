@@ -13,7 +13,8 @@
 
 :root{
   --primary-bg:#B45309;
-  --primary-hover-color:#D97706
+  --primary-hover-color:#D97706;
+  --error-color:#de2121
 }
 
 /* .App {
@@ -103,8 +104,14 @@
   height: 1.5rem;
   width: 1.5rem;
   border:none;
+  cursor: pointer;
   border-radius: 50%;
   box-shadow: 0.2rem 0.2rem 1rem rgb(0 0 0 / 56%);
+}
+.price{
+  display: flex;
+  flex-direction: row;
+  align-items:baseline;
 }
 .product{
   margin:0.2rem 0.2rem;
@@ -121,9 +128,30 @@
   flex-direction: row;
   justify-content: space-around;
 }
+.go-to-cart-btn{
+  width: 100%;
+  border: 1px solid rgba(141, 137, 137, 0.829);
+  color: black;
+  background-color: transparent;
+}
+.go-to-cart-btn:hover{
+  width: 100%;
+  border: 1px solid rgba(141, 137, 137, 0.829);
+  color: black;
+  background-color: transparent;
+  box-shadow:0.1rem 0 0.6rem rgb(0 0 0 / 56%);
+}
 .add-to-cart-btn{
   width: 100%;
+  background-color: rgb(255, 217, 0);
+  color: black;
 }
+.add-to-cart-btn:hover{
+  width: 100%;
+  background-color: rgb(255, 190, 0);
+  color: black;
+}
+
 .product-name{
   padding: .3rem;
     overflow: hidden;
@@ -185,6 +213,9 @@
   width: 100%;
   z-index: 5;
 }
+.strike{
+  text-decoration: line-through;
+}
 .pd2 {
   padding: 2rem;
 }
@@ -199,6 +230,9 @@
 }
 .mg1-r{
   margin-right: 1rem;
+}
+.mg0_5-r{
+  margin-right: 0.5rem;
 }
 .mg1-t{
   margin-top: 1rem;
@@ -227,7 +261,14 @@
 a{
   text-decoration: none;
 }
-
+.avatar{
+  background-color: #c06622;
+  color: white;
+  padding:0.75rem
+}
+.avatar:hover{
+  background-color: var(--primary-hover-color);
+}
 .input{
     font-size: var(--font-size-1-5);
     padding: var(--padding-0-5);

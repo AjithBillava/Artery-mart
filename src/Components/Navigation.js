@@ -5,7 +5,7 @@ import { useData } from "../Context/DataContext"
 // import { productDB as prodData } from "../Database/ProductDB";
 
 export const getTotalItem = (item) => {
-    return item.reduce((total, { qty }) => total + qty, 0);
+    return item?.reduce((total, { qty }) => total + qty, 0);
   };
 
 export const getSearchedData = (productList,searchedItem)=>{
@@ -24,9 +24,9 @@ export const getSearchedData = (productList,searchedItem)=>{
 };
 
 export const Navigation = () =>{
-    const { state:{wishlist, cartQuantity}} = useData()
+    const { state:{wishlist, cartQuantity,isAuthenticated,user}} = useData()
     // const prodData = useAxios()
-  
+    console.log(wishlist,wishlist?.products)
     return(
         <div>
             <nav className="header align-center" >
@@ -37,8 +37,15 @@ export const Navigation = () =>{
                  
                   <div>
                       <ul className="non-bullet nav-social-links inline-list align-center spa">
-                        <Link className="btn md-btn primary-btn" to="/login">
-                          login
+                        <Link  to="/login">
+                          {isAuthenticated?
+                          <div className="avatar ">
+                            {user?.firstname.charAt(0) + user?.lastname.charAt(0)}
+                          </div> 
+                          : 
+                          <div className="btn md-btn primary-btn">
+                            login
+                          </div>}
                         </Link>
                       <Link
                   to="/cart"
@@ -71,7 +78,7 @@ export const Navigation = () =>{
                   <i  style={{height:"2rem",width:"2rem"}}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="black" version="1.1" x="0px" y="0px" viewBox="0 0 512 640" ><g><path d="M256,448l-30.164-27.211C118.718,322.442,48,258.61,48,179.095C48,114.221,97.918,64,162.4,64   c36.399,0,70.717,16.742,93.6,43.947C278.882,80.742,313.199,64,349.6,64C414.082,64,464,114.221,464,179.095   c0,79.516-70.719,143.348-177.836,241.694L256,448z"></path></g></svg>
                   </i>
-                  {getTotalItem(wishlist)>0?<span
+                  {wishlist?.products?.length>0?<span
                     style={{
                       position: "absolute",
                       top: "0",
@@ -84,7 +91,7 @@ export const Navigation = () =>{
                     }}
                     className="sm-btn round center"
                   >
-                    {getTotalItem(wishlist)}
+                    {wishlist?.products?.length}
                   </span>:<span></span>}
                 </Link>
                 

@@ -1,4 +1,6 @@
 import { useReducer } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useData } from "../Context/DataContext";
 // import { useLocation, useNavigate } from "react-router-dom"
 // import { useLogin } from "../Context/LoginContext"
 
@@ -38,11 +40,10 @@ export const registerReducer  = (state,{type,payload}) =>{
 }
 
 export const Register = () =>{
-    // const {login,userLogin,userLogout} =useLogin()
-    // const {state} =useLocation()
-    // const navigate = useNavigate()
-
-    const [{ email, password }, dispatch] = useReducer(registerReducer, {
+    const {registerUser} = useData()
+    const {state} =useLocation()
+    const navigate = useNavigate()
+    const [{ firstName,lastName, email, password }, dispatch] = useReducer(registerReducer, {
         email: "",
         password: "",
         firstName: "",
@@ -57,11 +58,11 @@ export const Register = () =>{
                 <div className="vertical-card center">
                 <input className="input curve" type="string" placeholder="First name" required 
                     onChange={(e) =>
-                        dispatch({ type: "email", payload: e.target.value })
+                        dispatch({ type: "firstName", payload: e.target.value })
                       }></input>
                     <input className="input curve" type="string" placeholder="Last name" required
                     onChange={(e) =>
-                        dispatch({ type: "password", payload: e.target.value })
+                        dispatch({ type: "lastName", payload: e.target.value })
                       }></input>
                     <input className="input curve" type="email" placeholder="Email" required 
                     onChange={(e) =>
@@ -72,9 +73,9 @@ export const Register = () =>{
                         dispatch({ type: "password", payload: e.target.value })
                       }></input>
                     <button  className="secondary-btn md-btn btn" value="send" onClick ={(e)=>{
-                        console.log(email,password)
+                        registerUser(firstName,lastName,email,password,state,navigate)
                         e.preventDefault()} }>
-                        {"Register"}
+                        Register
                     </button>
 
                 </div>

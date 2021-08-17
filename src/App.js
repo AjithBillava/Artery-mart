@@ -12,9 +12,11 @@ import { PrivateRoute } from './Components/private route/PrivateRoute';
 import { Register } from './Components/register';
 import { useData } from './Context/DataContext';
 import { Loader } from './Components/loader';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [showToast,setShowToast] = useState(false)
-  const {loadData,state} = useData()
+  const {loadData,loadUser,state} = useData()
   useEffect(()=>{
     const interval=setTimeout(()=>{
       setShowToast(false)
@@ -28,19 +30,20 @@ function App() {
 		let isMounted = true;
 		if (isMounted) {
       loadData()
-			
+			loadUser()
 		}
 		return () => {
 			isMounted = false;
 		};
 	}, []);
 
+  toast.configure()
   return (
     <div className="App">
       <Navigation/>
       {showToast && <CartUpdatedToast/>}
       {state.isLoading && <Loader/>}
-
+      <ToastContainer/>
       <Routes>
         <Route path="/" element={<Product showToast={showToast} setShowToast={setShowToast} />} />
         <PrivateRoute path="/cart" element={<Cart/>} />

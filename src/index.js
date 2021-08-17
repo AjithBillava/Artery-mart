@@ -6,17 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from "react-router-dom"
 import { DataProvider } from './Context/DataContext';
 import { ProductProvider } from './Context/ProductContext';
-import { LoginProvider } from './Context/LoginContext';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <LoginProvider>
         <ProductProvider>
           <DataProvider>
             <App />
           </DataProvider>
         </ProductProvider>
-      </LoginProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

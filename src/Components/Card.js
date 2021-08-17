@@ -1,20 +1,17 @@
-import { checkItem } from "../utils/checkItem";
-import {  ADD_TO_CART,  ADD_TO_WISHLIST,  REMOVE_FROM_WISHLIST} from "../Reducer/DataReducer";
+import { checkItem, checkItemInCart } from "../utils/checkItem";
 import { useData } from "../Context/DataContext";
 import { Link } from "react-router-dom";
 
-export const Card =({item:{_id,
-    name,
-    image,
-    price,
-    productName,
-    inStock,
-    rating,
-    fastDelivery,
-    offer},showToast,setShowToast})=>{
-  const { state:{cartItems, wishlist},dataDispatch } = useData();
+export const Card =({item:{_id,name,image,price,productName,inStock,rating,fastDelivery}})=>{
+  const { state:{cartItems, wishlist,user},addToCart,addToWishlist,removeFromWishlist } = useData();
 // console.log(key)
-// console.log(key)
+// // console.log(key)
+// console.log(checkItemInCart(cartItems, _id),_id)
+// console.log(checkItem(wishlist, _id))
+
+const cartProd = cartItems?.products?.filter(item=>item.product._id===_id)
+console.log(cartProd,checkItemInCart(cartItems, _id))
+const userId=user._id
     return(
         <div    className="card product center  md-width-card  relative-box ">
                 <button 
@@ -24,25 +21,8 @@ export const Card =({item:{_id,
                     }}
                     onClick={() => {
                         checkItem(wishlist, _id)
-                        ? dataDispatch({
-                            type: REMOVE_FROM_WISHLIST,
-                            id:_id
-                            })
-                        : setTimeout(
-                            ()=>{ dataDispatch({
-                            type: ADD_TO_WISHLIST,
-                            item: {
-                                _id,
-                                name,
-                                price,
-                                inStock,
-                                rating,
-                                fastDelivery,
-                                image,
-                                offer,
-                                qty: 1
-                            }
-                            });},1000)
+                        ? removeFromWishlist(userId,_id)
+                        :  addToWishlist(userId,_id);
                     }}
                 >
                   <i className="fa fa-heart"></i>
@@ -53,7 +33,11 @@ export const Card =({item:{_id,
                 <div>
                   <h3 className="product-name"> {name} </h3>
                   <div className="product-details center">
-                      <div className="md-txt">Rs. {price}</div>
+                      <div className="price ">
+                        <p className="md-txt mg0_5-r ">₹{price-((price*10)/100)}</p>
+                        <p className="strike">{price} </p>
+                      </div>
+                      
                       <div className="rating center curve">
                       {rating}
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" className="rating-icon" viewBox="0 0 32 32"> <title>star-full</title>
@@ -66,31 +50,16 @@ export const Card =({item:{_id,
                   </div>
                   <div className="horizontal-card wrap center">
                   <Link
-                    to={checkItem(cartItems, _id) ? "/cart" : "/"}
-                    className="btn add-to-cart-btn md-btn primary-btn"
+                    to={checkItemInCart(cartItems, _id)?.length>0 ? "/cart" : "/"}
+                    className={checkItemInCart(cartItems, _id)?.length>0?"btn go-to-cart-btn md-btn primary-btn":"btn add-to-cart-btn md-btn primary-btn"}
                     onClick={() => {
-                      if (!checkItem(cartItems, _id)) {
-                        setTimeout(() => {
-                          setShowToast(!showToast)
-                          dataDispatch({
-                            type: ADD_TO_CART,
-                            item: {
-                              _id,
-                              name,
-                              price,
-                              inStock,
-                              rating,
-                              fastDelivery,
-                              image,
-                              qty: 1
-                            }
-                          });
-                        }, 1000);
-                        
+                      if (checkItemInCart(cartItems, _id)?.length===0||checkItemInCart(cartItems, _id)===false) {
+                         
+                          addToCart(userId,_id)                       
                       }
                     }}
                   >
-                    {checkItem(cartItems, _id) ? "Go to Cart" : "Add to cart"}
+                    {checkItemInCart(cartItems, _id)?.length>0 ? "Go to Cart" : "Add to cart"}
                   </Link>
                 </div>
                 </div>
