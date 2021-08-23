@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useData } from "../Context/DataContext";
 // import { useLocation, useNavigate } from "react-router-dom"
 // import { useLogin } from "../Context/LoginContext"
@@ -53,8 +53,8 @@ export const Register = () =>{
     return(
         <div className="horizontal-card center wrap main-section">
 
-            <form className="sub-heading card block-card ">
-                <div className="mr1">Register page</div>
+            <form className="card block-card ">
+                <div className="mr1 sub-heading  center">Register page</div>
                 <div className="vertical-card center">
                 <input className="input curve" type="string" placeholder="First name" required 
                     onChange={(e) =>
@@ -77,7 +77,10 @@ export const Register = () =>{
                         e.preventDefault()} }>
                         Register
                     </button>
-
+                    <div className="grey-text ">
+                        Already registered ?
+                        <Link to="/register"> Login here</Link>
+                    </div>
                 </div>
                 
             </form>

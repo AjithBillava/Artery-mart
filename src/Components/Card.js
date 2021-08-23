@@ -27,6 +27,13 @@ const userId=user._id
                 >
                   <i className="fa fa-heart"></i>
                 </button>
+                {fastDelivery?
+                <div className="fast-delivery-tag top-left">
+                  fast delivery
+                </div>
+                :
+                <div>
+                </div>}
                 <div className="img center" >
                   <img  src={image} width="100%" height="100%" alt={productName} />
                 </div>
@@ -34,8 +41,9 @@ const userId=user._id
                   <h3 className="product-name"> {name} </h3>
                   <div className="product-details center">
                       <div className="price ">
-                        <p className="md-txt mg0_5-r ">₹{price-((price*10)/100)}</p>
-                        <p className="strike">{price} </p>
+                        {/* <p className="md-txt mg0_5-r ">₹{price-((price*10)/100)}</p>
+                        <p className="strike">{price} </p> */}
+                        <p className="md-txt mg0_5-r price-tag curve">₹{price} </p>
                       </div>
                       
                       <div className="rating center curve">

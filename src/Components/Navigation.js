@@ -36,7 +36,7 @@ export const Navigation = () =>{
                   </div>
                  
                   <div>
-                      <ul className="non-bullet nav-social-links inline-list align-center spa">
+                      <ul className="non-bullet inline-list align-center">
                         <Link  to="/login">
                           {isAuthenticated?
                           <div className="avatar ">

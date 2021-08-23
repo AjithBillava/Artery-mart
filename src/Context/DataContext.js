@@ -21,6 +21,7 @@ export const TokenConfig = () => {
 
 export const DataContext = createContext({});
 export const DataProvider = ({ children }) => {
+  
   const [
     state,
     dataDispatch
@@ -32,8 +33,12 @@ export const DataProvider = ({ children }) => {
       const {data : productData } = await axios.get(`${REACT_APP_BACKEND_URL}/products`)
       console.log(productData)
       dataDispatch({type:"SET_PRODUCT",payLoad:productData.products})
-       dataDispatch({type:"SET_LOADING",payLoad:false})
-
+      dataDispatch({type:"SET_LOADING",payLoad:false})
+      toast.success(data.message, {
+        style: { backgroundColor: "##15b996" },
+        autoClose: 2000,
+        hideProgressBar: true,
+			});
     }catch(error){
       console.log(error.response)
     }
@@ -46,9 +51,19 @@ export const DataProvider = ({ children }) => {
       
       dataDispatch({type:"LOAD_USER",payLoad:data})
       
-       dataDispatch({type:"SET_LOADING",payLoad:false})
+      dataDispatch({type:"SET_LOADING",payLoad:false})
+      toast.success(data.message, {
+				style: { backgroundColor: "##15b996" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
 
     }catch(error){
+      toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       console.log(error.response)
     }
   }
@@ -71,17 +86,26 @@ export const DataProvider = ({ children }) => {
   const logoutUser = ()=>{
     try{
       dataDispatch({type:"LOGOUT_USER"})
+      toast.error("Logged out successfully", {
+				style: { backgroundColor: "##15b996" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
     }catch(error){
       console.error(error);
     }
   }
   const registerUser = async(firstname,lastname,email,password,state,navigate)=>{
     try{
+      toast.info("Registering...", {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       const {data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/register`,{firstname,lastname,email,password})
       console.log(data)
       dataDispatch({type:"REGISTER_USER",payLoad:data})
       navigate(state?.from?state.from:"/")
-      toast.success("User Registered Successfully", {
+      toast.success(data.message, {
 				style: { backgroundColor: "##15b996" },
 				autoClose: 2000,
 				hideProgressBar: true,
@@ -93,9 +117,16 @@ export const DataProvider = ({ children }) => {
 
   const addToWishlist = async(userId,product) =>{
       try{
-        // console.log(item)
+        toast.info("Updating...", {
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
         const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/wishlist`,{userId,product},TokenConfig())
         console.log(data)
+        toast.success(data.message, {
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
         dataDispatch({type: "ADD_TO_WISHLIST",payLoad:data})
         
       }
@@ -105,8 +136,16 @@ export const DataProvider = ({ children }) => {
     }
   const removeFromWishlist = async(userId,product) =>{
       try{
+        toast.info("Updating...", {
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
         const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/wishlist/remove`,{userId,product},TokenConfig())
         console.log(data)
+        toast.error(data.message, {
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
         dataDispatch({type: "REMOVE_FROM_WISHLIST",payLoad:data})
         
       }
@@ -117,7 +156,15 @@ export const DataProvider = ({ children }) => {
   
   const addToCart = async(userId,product) =>{
     try{
+      toast.info("Updating...", {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       const {data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/cart`,{userId,product},TokenConfig())
+      toast.success(data.message, {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       dataDispatch({type:"ADD_TO_CART",payLoad:data})
     }
     catch(error){
@@ -133,7 +180,15 @@ export const DataProvider = ({ children }) => {
   }
   const removeFromCart = async(userId,productId) =>{
     try{
+      toast.info("Updating...", {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       const {data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/cart/remove`,{userId,productId},TokenConfig())
+      toast.error(data.message, {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       dataDispatch({type:"REMOVE_CART",payLoad:data})
     }
     catch(error){
@@ -142,10 +197,16 @@ export const DataProvider = ({ children }) => {
   }
   const incrementItem = async(productsId,cartId,userId) =>{
     try{
-      console.log(productsId)
-      // const quantity = state.catr
+      toast.info("Updating...", {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       const {data}=await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/cart/update`,{cartId,productsId,operation:"increment"},
       TokenConfig())
+      toast.success(data.message, {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       dataDispatch({type:"INCREMENT_ITEM_OR_DECREMENT_ITEM",payLoad:data})
 
       console.log(data)
@@ -156,9 +217,16 @@ export const DataProvider = ({ children }) => {
   }
   const decrementItem = async(productsId,cartId,userId) =>{
     try{
-      console.log(productsId)
+      toast.info("Updating...", {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       const {data}=await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/cart/update`,{cartId,productsId,operation:"decrement"},
       TokenConfig())
+      toast.success(data.message, {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       dataDispatch({type:"INCREMENT_ITEM_OR_DECREMENT_ITEM",payLoad:data})
 
       console.log(data)
@@ -166,6 +234,14 @@ export const DataProvider = ({ children }) => {
     catch(error){
       console.error(error);
     }
+  }
+
+  const placeOrder = async() =>{
+    toast.success("Order placed successfully", {
+      style: { backgroundColor: "##15b996" },
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
   }
 
   return (
@@ -183,6 +259,7 @@ export const DataProvider = ({ children }) => {
         removeFromCart,
         incrementItem,
         decrementItem,
+        placeOrder,
         dataDispatch
       }}
     >

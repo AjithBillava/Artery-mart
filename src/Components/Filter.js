@@ -10,8 +10,8 @@ export const Filter = () =>{
     return(
         <div className="side-nav">
             <div className="horizontal-card filter-title space-between center pd2-l-r">
-                <p className="md-txt"> Filters </p>
-                <button className="btn link-btn md-btn" style={{ margin: "0 1rem" }}
+                <p className="md-txt filter-btn"> Filters </p>
+                <button className="btn link-btn clear"
                     onClick={() => productDispatch({ type: CLEAR })}>
                     clear
                 </button>

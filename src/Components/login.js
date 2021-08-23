@@ -38,8 +38,12 @@ export const Login = () =>{
       });
 
     return(
-        <div className="horizontal-card center wrap main-section">
-
+        <div className="horizontal-card wrap main-section center">
+            {isAuthenticated?
+            <div>
+                <button className="remove-btn md-btn btn" onClick={()=>logoutUser()}>Logout</button>
+            </div>
+            :
             <form className=" card block-card ">
                 <div className="center sub-heading mr1">Login page</div>
                 <div className="vertical-card center">
@@ -53,18 +57,18 @@ export const Login = () =>{
                       }></input>
                     <button  className="secondary-btn md-btn btn" value="send" onClick={(e)=>
                     {       
-                        if(!isAuthenticated){
+                        // if(!isAuthenticated){
                             loginUser(email,password,state,navigate)
                             e.preventDefault()
-                        }
-                        else{
-                            logoutUser()
-                        }
+                        // }
+                        // else{
+                        //     logoutUser()
+                        // }
                         }
                     }          
 
                     >
-                        {isAuthenticated?"Logout":"Login"}
+                        Login
                     </button>
                     <div className="grey-text">
                         Not registered yet?
@@ -72,7 +76,7 @@ export const Login = () =>{
                     </div>
                 </div>
                 
-            </form>
+            </form>}
             
         </div>
     )
