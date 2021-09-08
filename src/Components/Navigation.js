@@ -1,8 +1,5 @@
-// import { useState } from "react";
 import {Link}from "react-router-dom"
 import { useData } from "../Context/DataContext"
-// import { useAxios } from "../Server/server.request";
-// import { productDB as prodData } from "../Database/ProductDB";
 
 export const getTotalItem = (item) => {
     return item?.reduce((total, { qty }) => total + qty, 0);
@@ -10,7 +7,6 @@ export const getTotalItem = (item) => {
 
 export const getSearchedData = (productList,searchedItem)=>{
   let val = searchedItem.toLocaleLowerCase();
-  console.log(productList)
   
   const searchedData = productList.filter((item) =>    item.name.toLocaleLowerCase().includes(val))
 
@@ -25,8 +21,7 @@ export const getSearchedData = (productList,searchedItem)=>{
 
 export const Navigation = () =>{
     const { state:{wishlist, cartQuantity,isAuthenticated,user}} = useData()
-    // const prodData = useAxios()
-    console.log(wishlist,wishlist?.products)
+
     return(
         <div>
             <nav className="header align-center" >
@@ -40,7 +35,7 @@ export const Navigation = () =>{
                         <Link  to="/login">
                           {isAuthenticated?
                           <div className="avatar ">
-                            {user?.firstname.charAt(0) + user?.lastname.charAt(0)}
+                            {user?.firstname.charAt(0).toUpperCase() + user?.lastname.charAt(0).toUpperCase()}
                           </div> 
                           : 
                           <div className="btn md-btn primary-btn">

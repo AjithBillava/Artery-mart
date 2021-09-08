@@ -62,11 +62,11 @@ export const dataReducer = (state, { type, id, item, payLoad }) => {
     case "LOGOUT_USER":
       localStorage.removeItem("token")
       localStorage.removeItem("isAuthenticated")
-      console.log(cartItems,wishlist)
       return{
         ...state,
         user:{},
         isAuthenticated:false,
+        cartQuantity:0,
         cartItems:[],
         wishlist:[]
       }
@@ -84,7 +84,6 @@ export const dataReducer = (state, { type, id, item, payLoad }) => {
         cartQuantity: payLoad.item.products?payLoad.item.products.length:0
       };
     case ADD_TO_CART:
-      console.log({item},{cartItems});
       return {
         ...state,
         cartItems: payLoad.item,
@@ -92,20 +91,17 @@ export const dataReducer = (state, { type, id, item, payLoad }) => {
       };
       
     case ADD_TO_WISHLIST:
-      console.log(wishlist)
       return {
         ...state,
         wishlist: payLoad.item
       };
 
     case REMOVE_FROM_WISHLIST:
-      console.log(wishlist)
       return {
         ...state,
         wishlist: payLoad.item
       };
     case "SEARCH":
-      console.log(payLoad)
       return{
         ...state, searchedText:payLoad
         }

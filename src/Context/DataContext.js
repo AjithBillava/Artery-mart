@@ -31,7 +31,7 @@ export const DataProvider = ({ children }) => {
     try{
       dataDispatch({type:"SET_LOADING",payLoad:true})
       const {data : productData } = await axios.get(`${REACT_APP_BACKEND_URL}/products`)
-      console.log(productData)
+      
       dataDispatch({type:"SET_PRODUCT",payLoad:productData.products})
       dataDispatch({type:"SET_LOADING",payLoad:false})
       toast.success(data.message, {
@@ -72,7 +72,7 @@ export const DataProvider = ({ children }) => {
       const {data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/login`,{email,password})
       
       dataDispatch({type:"LOGIN_USER",payLoad:data})
-      console.log(data)
+      
       toast.success("Logged in successfully", {
 				autoClose: 2000,
 				hideProgressBar: true,
@@ -102,7 +102,7 @@ export const DataProvider = ({ children }) => {
 				hideProgressBar: true,
 			});
       const {data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/register`,{firstname,lastname,email,password})
-      console.log(data)
+      
       dataDispatch({type:"REGISTER_USER",payLoad:data})
       navigate(state?.from?state.from:"/")
       toast.success(data.message, {
@@ -122,7 +122,7 @@ export const DataProvider = ({ children }) => {
           hideProgressBar: true,
         });
         const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/wishlist`,{userId,product},TokenConfig())
-        console.log(data)
+        
         toast.success(data.message, {
           autoClose: 2000,
           hideProgressBar: true,
@@ -141,7 +141,7 @@ export const DataProvider = ({ children }) => {
           hideProgressBar: true,
         });
         const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/wishlist/remove`,{userId,product},TokenConfig())
-        console.log(data)
+        
         toast.error(data.message, {
           autoClose: 2000,
           hideProgressBar: true,
@@ -209,7 +209,6 @@ export const DataProvider = ({ children }) => {
 			});
       dataDispatch({type:"INCREMENT_ITEM_OR_DECREMENT_ITEM",payLoad:data})
 
-      console.log(data)
     }
     catch(error){
       console.error(error);
@@ -229,7 +228,6 @@ export const DataProvider = ({ children }) => {
 			});
       dataDispatch({type:"INCREMENT_ITEM_OR_DECREMENT_ITEM",payLoad:data})
 
-      console.log(data)
     }
     catch(error){
       console.error(error);

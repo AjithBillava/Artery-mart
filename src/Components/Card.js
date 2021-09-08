@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Card =({item:{_id,name,image,price,productName,inStock,rating,fastDelivery}})=>{
   const { state:{cartItems, wishlist,user},addToCart,addToWishlist,removeFromWishlist } = useData();
-// console.log(key)
-// // console.log(key)
-// console.log(checkItemInCart(cartItems, _id),_id)
-// console.log(checkItem(wishlist, _id))
 
-const cartProd = cartItems?.products?.filter(item=>item.product._id===_id)
-console.log(cartProd,checkItemInCart(cartItems, _id))
 const userId=user._id
     return(
         <div    className="card product center  md-width-card  relative-box ">

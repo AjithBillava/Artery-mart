@@ -2,18 +2,17 @@ import { useData } from "../Context/DataContext";
 import { ProductDescription } from "./ProductDescription";
 
 const getTotalAmount = (item) => {
-  console.log(item)
+  
   return item?.reduce((total, { product,quantity }) => total + product.price * quantity, 0);
 };
 const getTotalQuantity= (item) => {
-  console.log(item)
+  
   return item?.reduce((total, { quantity }) => total + quantity, 0);
 };
 
 export  function Cart() {
   const { state:{cartItems,  cartQuantity},placeOrder} = useData();
-  
-  console.log(cartQuantity);
+ 
   if (cartQuantity === 0) {
     return (
       <div className="center grey-text main-section">
@@ -33,8 +32,6 @@ export  function Cart() {
         </section>
         <div className=" cart-main-section center curve"> 
 
-          {/* <div className="center lg-txt">Total: {getTotalAmount(cartItems.products)} </div> */}
-
           <div className="vertical-card center wrap">
             {cartItems?.products?.map(
               (item) => (
@@ -42,9 +39,7 @@ export  function Cart() {
               )
             )}
           </div>
-          {/* <div className="cart-side-section curve shadow">
-            <p className="center md-txt">Total price:<b>₹{getTotalAmount(cartItems.products)}</b> </p >
-          </div> */}
+          
         </div>
       </div>
     );

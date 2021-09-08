@@ -30,12 +30,10 @@ export function Product({showToast,setShowToast}) {
 				item.name.toLowerCase().includes(searchedText.toLowerCase())
 					//  
 			);
-    console.log(searchedItems)
 		setSearchedData(searchedItems);
 
 		return () => setSearchedData([]);
 	}, [searchedText]);
-  console.log(searchedData)
 
   
   if(searchedText && searchedData.length===0){
