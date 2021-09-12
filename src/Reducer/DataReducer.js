@@ -17,8 +17,8 @@ export const data = {
   searchedText:""
 };
 
-export const dataReducer = (state, { type, id, item, payLoad }) => {
-  const { cartItems, wishlist} = state;
+export const dataReducer = (state, { type, payLoad }) => {
+  
  
   switch (type) {
     case "SET_PRODUCT":
