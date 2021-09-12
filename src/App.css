@@ -350,6 +350,9 @@
 .mg1-b{
   margin-bottom: 1rem;
 }
+.mg0_5-b{
+  margin-bottom: 0.5rem;
+}
 .md-btn {
   margin: 0;
   width: max-content;
