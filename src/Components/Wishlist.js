@@ -7,7 +7,7 @@ export  function Wishlist() {
   const { state:{cartItems, wishlist,user},addToCart,removeFromWishlist } = useData();
   const userId=user._id
 
-  if (getTotalItem(wishlist?.products) === 0) {
+  if (getTotalItem(wishlist?.products) === 0 || wishlist===undefined) {
     return (
       <div className="center grey-text main-section" >
         <h1>The wishlist is empty</h1>

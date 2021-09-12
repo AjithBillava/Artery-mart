@@ -13,7 +13,7 @@ const getTotalQuantity= (item) => {
 export  function Cart() {
   const { state:{cartItems,  cartQuantity},placeOrder} = useData();
  
-  if (cartQuantity === 0) {
+  if (cartQuantity === 0 || cartItems===undefined) {
     return (
       <div className="center grey-text main-section">
         <h1>The cart is empty</h1>
@@ -26,8 +26,8 @@ export  function Cart() {
         <p className="center lg-txt curve">Shopping Cart</p>
         </u>
         <section className="cart-total-section curve  center">
-            <p className="center md-txt">Total price:<b>₹{getTotalAmount(cartItems.products)}</b> </p >
-            <p className="center md-txt">Total quantity:<b>{getTotalQuantity(cartItems.products)}</b> </p >
+            <p className="center md-txt">Total price:<b>₹{getTotalAmount(cartItems?.products)}</b> </p >
+            <p className="center md-txt">Total quantity:<b>{getTotalQuantity(cartItems?.products)}</b> </p >
             <button onClick={()=>placeOrder()} className="btn primary-btn md-btn mr1">Place order</button>
         </section>
         <div className=" cart-main-section center curve"> 
