@@ -80,6 +80,11 @@ export const DataProvider = ({ children }) => {
       navigate(state?.from?state.from:"/")
 
     }catch(error){
+      toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       console.log(error.response)
     }
   }
@@ -111,16 +116,21 @@ export const DataProvider = ({ children }) => {
 				hideProgressBar: true,
 			});
     }catch(error){
+      toast.error(error.response.data.errorMessage, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       console.log(error.response)
     }
   }
 
   const addToWishlist = async(userId,product) =>{
       try{
-        toast.info("Updating...", {
-          autoClose: 2000,
-          hideProgressBar: true,
-        });
+        // toast.info("Updating...", {
+        //   autoClose: 2000,
+        //   hideProgressBar: true,
+        // });
         const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/wishlist`,{userId,product},TokenConfig())
         
         toast.success(data.message, {
@@ -131,15 +141,20 @@ export const DataProvider = ({ children }) => {
         
       }
       catch(error){
+        toast.error(error.response.data.message, {
+          style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
         console.error(error);
       }
     }
   const removeFromWishlist = async(userId,product) =>{
       try{
-        toast.info("Updating...", {
-          autoClose: 2000,
-          hideProgressBar: true,
-        });
+        // toast.info("Updating...", {
+        //   autoClose: 2000,
+        //   hideProgressBar: true,
+        // });
         const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/wishlist/remove`,{userId,product},TokenConfig())
         
         toast.error(data.message, {
@@ -150,16 +165,21 @@ export const DataProvider = ({ children }) => {
         
       }
       catch(error){
+        toast.error(error.response.data.message, {
+          style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
         console.error(error);
       }
     }
   
   const addToCart = async(userId,product) =>{
     try{
-      toast.info("Updating...", {
-				autoClose: 2000,
-				hideProgressBar: true,
-			});
+      // toast.info("Updating...", {
+			// 	autoClose: 2000,
+			// 	hideProgressBar: true,
+			// });
       const {data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/cart`,{userId,product},TokenConfig())
       toast.success(data.message, {
 				autoClose: 2000,
@@ -180,10 +200,10 @@ export const DataProvider = ({ children }) => {
   }
   const removeFromCart = async(userId,productId) =>{
     try{
-      toast.info("Updating...", {
-				autoClose: 2000,
-				hideProgressBar: true,
-			});
+      // toast.info("Updating...", {
+			// 	autoClose: 2000,
+			// 	hideProgressBar: true,
+			// });
       const {data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/cart/remove`,{userId,productId},TokenConfig())
       toast.error(data.message, {
 				autoClose: 2000,
@@ -192,15 +212,20 @@ export const DataProvider = ({ children }) => {
       dataDispatch({type:"REMOVE_CART",payLoad:data})
     }
     catch(error){
+      toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       console.error(error);
     }
   }
   const incrementItem = async(productsId,cartId,userId) =>{
     try{
-      toast.info("Updating...", {
-				autoClose: 2000,
-				hideProgressBar: true,
-			});
+      // toast.info("Updating...", {
+			// 	autoClose: 2000,
+			// 	hideProgressBar: true,
+			// });
       const {data}=await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/cart/update`,{cartId,productsId,operation:"increment"},
       TokenConfig())
       toast.success(data.message, {
@@ -211,15 +236,20 @@ export const DataProvider = ({ children }) => {
 
     }
     catch(error){
+      toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       console.error(error);
     }
   }
   const decrementItem = async(productsId,cartId,userId) =>{
     try{
-      toast.info("Updating...", {
-				autoClose: 2000,
-				hideProgressBar: true,
-			});
+      // toast.info("Updating...", {
+			// 	autoClose: 2000,
+			// 	hideProgressBar: true,
+			// });
       const {data}=await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/cart/update`,{cartId,productsId,operation:"decrement"},
       TokenConfig())
       toast.success(data.message, {
@@ -230,6 +260,11 @@ export const DataProvider = ({ children }) => {
 
     }
     catch(error){
+      toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
       console.error(error);
     }
   }
