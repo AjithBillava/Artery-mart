@@ -2,7 +2,7 @@
   "name": "artery-mart",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/",
+  "homepage": "https://artery-mart.netlify.app",
   "dependencies": {
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^11.2.6",
