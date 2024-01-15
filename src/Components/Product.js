@@ -33,7 +33,6 @@ export function Product({showToast,setShowToast}) {
 		setSearchedData(searchedItems);
 
 		return () => setSearchedData([]);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchedText]);
 
   
